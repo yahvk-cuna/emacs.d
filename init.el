@@ -79,6 +79,8 @@
 
 (require 'init-projectile)
 
+(require 'init-neotree)
+
 (require 'init-compile)
 ;;(require 'init-crontab)
 (require 'init-textile)
