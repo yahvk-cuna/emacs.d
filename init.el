@@ -59,6 +59,7 @@
 (require 'init-ibuffer)
 (require 'init-flycheck)
 
+(require 'init-lsp)
 (require 'init-recentf)
 (require 'init-smex)
 (require 'init-ivy)

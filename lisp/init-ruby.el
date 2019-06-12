@@ -22,6 +22,9 @@
 
 (require-package 'rspec-mode)
 
+(after-load 'lsp-mode
+  (add-hook 'ruby-mode-hook #'lsp))
+
 
 (define-derived-mode brewfile-mode ruby-mode "Brewfile"
   "A major mode for Brewfiles, used by homebrew-bundle on MacOS.")

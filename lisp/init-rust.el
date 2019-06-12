@@ -12,5 +12,8 @@
   (after-load 'rust-mode
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 
+(after-load 'lsp-mode
+  (add-hook 'rust-mode-hook #'lsp))
+
 (provide 'init-rust)
 ;;; init-rust.el ends here
