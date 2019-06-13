@@ -22,8 +22,9 @@
 
 (require-package 'rspec-mode)
 
-(after-load 'lsp-mode
-  (add-hook 'ruby-mode-hook #'lsp))
+(add-hook 'ruby-mode-hook #'lsp)
+
+(require-package 'ruby-end)
 
 
 (define-derived-mode brewfile-mode ruby-mode "Brewfile"
