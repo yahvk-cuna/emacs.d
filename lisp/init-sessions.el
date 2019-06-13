@@ -3,8 +3,10 @@
 ;;; Code:
 
 ;; save a list of open files in ~/.emacs.d/.emacs.desktop
-(setq desktop-path (list user-emacs-directory)
-      desktop-auto-save-timeout 600)
+;; (setq desktop-path (list user-emacs-directory)
+;;       desktop-auto-save-timeout 600)
+(when (getenv "PWD")
+  (setq desktop-path (list (getenv "PWD"))) )
 (desktop-save-mode 1)
 
 (defun sanityinc/desktop-time-restore (orig &rest args)
