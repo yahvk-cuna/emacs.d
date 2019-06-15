@@ -50,6 +50,11 @@
 
 
 
+;;; rubocop
+(require-package 'rubocop)
+(add-hook 'ruby-mode-hook #'rubocop-mode)
+
+
 ;;; Robe
 (when (maybe-require-package 'robe)
   (after-load 'ruby-mode
