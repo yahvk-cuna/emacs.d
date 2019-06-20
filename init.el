@@ -71,6 +71,7 @@
 (require 'init-windows)
 (require 'init-sessions)
 (require 'init-mmm)
+(require 'init-undo)
 
 (require 'init-editing-utils)
 (require 'init-whitespace)
