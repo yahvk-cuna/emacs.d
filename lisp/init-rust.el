@@ -3,8 +3,6 @@
 ;;; Code:
 
 (when (maybe-require-package 'rust-mode)
-  (when (maybe-require-package 'racer)
-    (add-hook 'rust-mode-hook #'racer-mode))
   (when (maybe-require-package 'company)
     (add-hook 'racer-mode-hook #'company-mode)))
 
@@ -12,8 +10,7 @@
   (after-load 'rust-mode
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 
-(after-load 'lsp-mode
-  (add-hook 'rust-mode-hook #'lsp))
+(add-hook 'rust-mode-hook #'lsp)
 
 (provide 'init-rust)
 ;;; init-rust.el ends here
