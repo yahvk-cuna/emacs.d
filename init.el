@@ -60,6 +60,7 @@
 (require 'init-ibuffer)
 (require 'init-flycheck)
 (require 'init-xclip)
+(require 'init-treemacs)
 
 (require 'init-lsp)
 (require 'init-recentf)
@@ -82,8 +83,6 @@
 (require 'init-github)
 
 (require 'init-projectile)
-
-(require 'init-neotree)
 
 (require 'init-compile)
 ;;(require 'init-crontab)
