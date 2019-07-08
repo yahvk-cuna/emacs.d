@@ -3,6 +3,7 @@
 ;;; Code:
 
 (when (maybe-require-package 'rust-mode)
+  (setq rust-format-on-save t)
   (when (maybe-require-package 'company)
     (add-hook 'racer-mode-hook #'company-mode)))
 
