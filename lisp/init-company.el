@@ -19,7 +19,9 @@
     (define-key company-active-map (kbd "C-n") 'company-select-next)
     (define-key company-active-map (kbd "C-p") 'company-select-previous)
     (setq-default company-dabbrev-other-buffers 'all
-                  company-tooltip-align-annotations t))
+                  company-tooltip-align-annotations t
+                  company-idle-delay 0
+                  company-show-numbers t))
   (global-set-key (kbd "M-C-/") 'company-complete)
   (when (maybe-require-package 'company-quickhelp)
     (add-hook 'after-init-hook 'company-quickhelp-mode)))
@@ -41,7 +43,19 @@
     (add-hook 'company-completion-started-hook 'sanityinc/page-break-lines-disable)
     (add-hook 'company-after-completion-hook 'sanityinc/page-break-lines-maybe-reenable)))
 
+(when (maybe-require-package 'company-tabnine)
+  (defadvice company-echo-show (around disable-tabnine-upgrade-message activate)
+    "The free version of TabNine is good enough,
+    and below code is recommended that TabNine not always
+    prompt me to purchase a paid version in a large project."
+    (let ((company-message-func (ad-get-arg 0)))
+      (when (and company-message-func
+                 (stringp (funcall company-message-func)))
+        (unless (string-match "The free version of TabNine only indexes up to" (funcall company-message-func))
+          ad-do-it))))
 
+  (after-load 'company
+    (add-to-list 'company-backends #'company-tabnine)))
 
 (provide 'init-company)
 ;;; init-company.el ends here
