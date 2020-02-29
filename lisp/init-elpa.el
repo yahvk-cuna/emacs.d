@@ -18,10 +18,10 @@
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
-  (add-to-list 'package-archives (cons "melpa" (concat proto "://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")) t)
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://mirrors.ustc.edu.cn/elpa/melpa/")) t)
   (unless no-ssl
     ;; Force SSL for GNU ELPA
-    (setcdr (assoc "gnu" package-archives) "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
+    (setcdr (assoc "gnu" package-archives) "https://mirrors.ustc.edu.cn/elpa/gnu/")))
 
 
 ;;; On-demand installation of packages
