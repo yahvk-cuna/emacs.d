@@ -43,19 +43,5 @@
     (add-hook 'company-completion-started-hook 'sanityinc/page-break-lines-disable)
     (add-hook 'company-after-completion-hook 'sanityinc/page-break-lines-maybe-reenable)))
 
-(when (maybe-require-package 'company-tabnine)
-  (defadvice company-echo-show (around disable-tabnine-upgrade-message activate)
-    "The free version of TabNine is good enough,
-    and below code is recommended that TabNine not always
-    prompt me to purchase a paid version in a large project."
-    (let ((company-message-func (ad-get-arg 0)))
-      (when (and company-message-func
-                 (stringp (funcall company-message-func)))
-        (unless (string-match "The free version of TabNine only indexes up to" (funcall company-message-func))
-          ad-do-it))))
-
-  (after-load 'company
-    (add-to-list 'company-backends #'company-tabnine)))
-
 (provide 'init-company)
 ;;; init-company.el ends here
