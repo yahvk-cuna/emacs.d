@@ -36,7 +36,6 @@
 ;;; Inferior ruby
 (require-package 'inf-ruby)
 
-
 
 ;;; Ruby compilation
 (require-package 'ruby-compilation)
@@ -47,7 +46,6 @@
 
 (after-load 'ruby-compilation
   (defalias 'rake 'ruby-compilation-rake))
-
 
 
 ;;; rubocop
@@ -63,12 +61,10 @@
     (after-load 'company
       (push 'company-robe company-backends))))
 
-
 
 ;;; ri support
 (require-package 'yari)
 (defalias 'ri 'yari)
-
 
 
 (require-package 'goto-gem)
@@ -110,30 +106,6 @@
 
 (dolist (mode (list 'js-mode 'js2-mode 'js3-mode))
   (mmm-add-mode-ext-class mode "\\.js\\.erb\\'" 'erb))
-
-
-;;----------------------------------------------------------------------------
-;; Ruby - my convention for heredocs containing SQL
-;;----------------------------------------------------------------------------
-
-;; Needs to run after rinari to avoid clobbering font-lock-keywords?
-
-;; (require-package 'mmm-mode)
-;; (eval-after-load 'mmm-mode
-;;   '(progn
-;;      (mmm-add-classes
-;;       '((ruby-heredoc-sql
-;;          :submode sql-mode
-;;          :front "<<-?[\'\"]?\\(end_sql\\)[\'\"]?"
-;;          :save-matches 1
-;;          :front-offset (end-of-line 1)
-;;          :back "^[ \t]*~1$"
-;;          :delimiter-mode nil)))
-;;      (mmm-add-mode-ext-class 'ruby-mode "\\.rb\\'" 'ruby-heredoc-sql)))
-
-;; (add-to-list 'mmm-set-file-name-for-modes 'ruby-mode)
-
-
 
 (provide 'init-ruby)
 ;;; init-ruby.el ends here
