@@ -12,6 +12,7 @@
 ;;     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 (add-hook 'rust-mode-hook (lambda () (setq flycheck-disabled-checkers '(rust rust-cargo rust-clippy))))
 
+(setq lsp-rust-server 'rust-analyzer)
 (add-hook 'rust-mode-hook #'lsp)
 
 (provide 'init-rust)

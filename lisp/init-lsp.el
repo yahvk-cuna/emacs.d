@@ -5,6 +5,7 @@
 (require-package 'lsp-ui)
 (require-package 'company-lsp)
 (setq lsp-enable-snippet nil)
+(setq lsp-keymap-prefix "C-l")
 
 (after-load 'lsp-mode
   (define-key lsp-mode-map (kbd "M-.") 'lsp-find-definition)
