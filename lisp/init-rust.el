@@ -14,6 +14,8 @@
 
 (setq lsp-rust-server 'rust-analyzer)
 (add-hook 'rust-mode-hook #'lsp)
+(add-hook 'lsp-after-open-hook (lambda () (when (lsp-find-workspace 'rust-analyzer nil)
+                                       (lsp-rust-analyzer-inlay-hints-mode))))
 
 (provide 'init-rust)
 ;;; init-rust.el ends here
