@@ -15,13 +15,10 @@
 
 ;;; Standard package repositories
 
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  (add-to-list 'package-archives (cons "melpa" (concat proto "://mirrors.ustc.edu.cn/elpa/melpa/")) t)
-  (unless no-ssl
-    ;; Force SSL for GNU ELPA
-    (setcdr (assoc "gnu" package-archives) "https://mirrors.ustc.edu.cn/elpa/gnu/")))
+;; (add-to-list 'package-archives '( "melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '( "melpa" . "https://mirrors.ustc.edu.cn/elpa/melpa/") t)
+;; Official MELPA Mirror, in case necessary.
+;;(add-to-list 'package-archives (cons "melpa-mirror" (concat proto "://www.mirrorservice.org/sites/melpa.org/packages/")) t)
 
 
 ;;; On-demand installation of packages

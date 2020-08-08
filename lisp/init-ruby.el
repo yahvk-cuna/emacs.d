@@ -17,8 +17,8 @@
 
 (add-hook 'ruby-mode-hook 'subword-mode)
 
-(after-load 'page-break-lines
-  (push 'ruby-mode page-break-lines-modes))
+(with-eval-after-load 'page-break-lines
+  (add-to-list 'page-break-lines-modes 'ruby-mode))
 
 (require-package 'rspec-mode)
 
@@ -40,11 +40,11 @@
 ;;; Ruby compilation
 (require-package 'ruby-compilation)
 
-(after-load 'ruby-mode
+(with-eval-after-load 'ruby-mode
   (define-key ruby-mode-map [S-f7] 'ruby-compilation-this-buffer)
   (define-key ruby-mode-map [f7] 'ruby-compilation-this-test))
 
-(after-load 'ruby-compilation
+(with-eval-after-load 'ruby-compilation
   (defalias 'rake 'ruby-compilation-rake))
 
 
@@ -55,19 +55,17 @@
 
 ;;; Robe
 (when (maybe-require-package 'robe)
-  (after-load 'ruby-mode
+  (with-eval-after-load 'ruby-mode
     (add-hook 'ruby-mode-hook 'robe-mode))
-  (after-load 'robe
-    (after-load 'company
-      (push 'company-robe company-backends))))
+  (with-eval-after-load 'robe
+    (with-eval-after-load 'company
+      (add-to-list 'company-backends 'company-robe))))
 
 
 ;;; ri support
 (require-package 'yari)
 (defalias 'ri 'yari)
 
-
-(require-package 'goto-gem)
 
 
 (require-package 'bundler)
@@ -75,7 +73,7 @@
 
 (when (maybe-require-package 'yard-mode)
   (add-hook 'ruby-mode-hook 'yard-mode)
-  (after-load 'yard-mode
+  (with-eval-after-load 'yard-mode
     (diminish 'yard-mode)))
 
 

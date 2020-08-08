@@ -8,7 +8,7 @@
     (add-hook 'racer-mode-hook #'company-mode)))
 
 ;; (when (maybe-require-package 'flycheck-rust)
-;;   (after-load 'rust-mode
+;;   (with-eval-after-load 'rust-mode
 ;;     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 (add-hook 'rust-mode-hook (lambda () (setq flycheck-disabled-checkers '(rust rust-cargo rust-clippy))))
 
