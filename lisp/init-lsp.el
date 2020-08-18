@@ -10,7 +10,7 @@
   (define-key lsp-mode-map (kbd "M-/") 'lsp-find-references))
 
 (require-package 'yasnippet)
-(yas-global-mode 1)
+(add-hook 'lsp-mode-hook #'yas-minor-mode)
 
 (provide 'init-lsp)
 ;;; init-lsp.el ends here
