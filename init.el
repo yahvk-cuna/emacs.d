@@ -64,9 +64,7 @@
 
 (require 'init-lsp)
 (require 'init-recentf)
-(require 'init-smex)
-(require 'init-ivy)
-;;(require 'init-helm)
+(require 'init-selectrum)
 (require 'init-hippie-expand)
 (require 'init-company)
 (require 'init-windows)
@@ -106,6 +104,7 @@
 (require 'init-rails)
 (require 'init-sql)
 (require 'init-ocaml)
+(require 'init-j)
 (require 'init-nim)
 (require 'init-rust)
 (require 'init-toml)
