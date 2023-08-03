@@ -88,6 +88,8 @@
 
 (require-package 'disable-mouse)
 
+(set-frame-parameter nil 'alpha-background 95)
+(add-hook 'window-setup-hook 'toggle-frame-maximized t)
 
 (provide 'init-gui-frames)
 ;;; init-gui-frames.el ends here

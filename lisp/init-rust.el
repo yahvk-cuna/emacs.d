@@ -2,20 +2,41 @@
 ;;; Commentary:
 ;;; Code:
 
-(when (maybe-require-package 'rust-mode)
-  (setq rust-format-on-save t)
-  (when (maybe-require-package 'company)
-    (add-hook 'racer-mode-hook #'company-mode)))
+(use-package rustic
+             :ensure
+             :bind (:map rustic-mode-map
+                         ("M-j" . lsp-ui-imenu)
+                         ("M-?" . lsp-find-references)
+                         ("C-c C-c l" . flycheck-list-errors)
+                         ("C-c C-c a" . lsp-execute-code-action)
+                         ("C-c C-c r" . lsp-rename)
+                         ("C-c C-c q" . lsp-workspace-restart)
+                         ("C-c C-c Q" . lsp-workspace-shutdown)
+                         ("C-c C-c s" . lsp-rust-analyzer-status))
+             :config
+             ;; uncomment for less flashiness
+             ;; (setq lsp-eldoc-hook nil)
+             ;; (setq lsp-enable-symbol-highlighting nil)
+             ;; (setq lsp-signature-auto-activate nil)
 
-;; (when (maybe-require-package 'flycheck-rust)
-;;   (with-eval-after-load 'rust-mode
-;;     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
-(add-hook 'rust-mode-hook (lambda () (setq flycheck-disabled-checkers '(rust rust-cargo rust-clippy))))
+             ;; comment to disable rustfmt on save
+             (setq rustic-format-on-save t)
+             ;; (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
+             )
 
+(defun rk/rustic-mode-hook ()
+  ;; so that run C-c C-c C-r works without having to confirm, but don't
+  ;; try to save rust buffers that are not file visiting. Once
+  ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
+  ;; no longer be necessary.
+  (when buffer-file-name
+    (setq-local buffer-save-without-query t))
+  (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+
+
 (setq lsp-rust-server 'rust-analyzer)
-(add-hook 'rust-mode-hook #'lsp)
-(add-hook 'lsp-after-open-hook (lambda () (when (lsp-find-workspace 'rust-analyzer nil)
-                                       (lsp-rust-analyzer-inlay-hints-mode))))
+(setq lsp-rust-analyzer-cargo-watch-command "clippy")
+
 
 (provide 'init-rust)
 ;;; init-rust.el ends here

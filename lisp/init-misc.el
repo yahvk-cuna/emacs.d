@@ -47,7 +47,7 @@
   (define-key reb-mode-map (kbd "C-c C-k") 'reb-quit))
 
 (add-auto-mode 'conf-mode "^Procfile\\'")
-
+(setq require-final-newline t)
 
 (provide 'init-misc)
 ;;; init-misc.el ends here

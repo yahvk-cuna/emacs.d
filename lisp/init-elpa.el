@@ -103,6 +103,8 @@ advice for `require-package', to which ARGS are passed."
 
 (add-hook 'package-menu-mode-hook 'sanityinc/maybe-widen-package-menu-columns)
 
+
+(require-package 'use-package)
 
 (provide 'init-elpa)
 ;;; init-elpa.el ends here

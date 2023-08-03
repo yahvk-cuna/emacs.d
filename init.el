@@ -99,7 +99,7 @@
 (require 'init-python)
 (require 'init-haskell)
 (require 'init-elm)
-(require 'init-purescript)
+; (require 'init-purescript)
 (require 'init-ruby)
 (require 'init-rails)
 (require 'init-sql)
@@ -133,6 +133,7 @@
 
 ;;(require 'init-twitter)
 ;; (require 'init-mu)
+(require 'init-direnv)
 (require 'init-ledger)
 ;; Extra packages which don't require any configuration
 
@@ -151,8 +152,6 @@
   (setq-default uptimes-keep-count 200)
   (add-hook 'after-init-hook (lambda () (require 'uptimes))))
 
-
-(require 'init-direnv)
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
