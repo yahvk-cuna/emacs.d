@@ -123,6 +123,8 @@
 
 (require 'init-cpp)
 
+(require 'init-copilot)
+
 (when *spell-check-support-enabled*
   (require 'init-spelling))
 
