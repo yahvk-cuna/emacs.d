@@ -10,8 +10,13 @@
                                  b))))
         httprepl-content-type-middleware-alist))
 
+(when (maybe-require-package 'jq-mode)
+  (add-to-list 'auto-mode-alist '("\\.jq$" . jq-mode))
+  (with-eval-after-load "json-mode"
+    (define-key json-mode-map (kbd "C-c C-j") #'jq-interactively)))
 
 (when (maybe-require-package 'restclient)
+  (require 'restclient-jq)
   (add-auto-mode 'restclient-mode "\\.rest\\'")
 
   (defun sanityinc/restclient ()
