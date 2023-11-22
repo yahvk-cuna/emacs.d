@@ -123,6 +123,7 @@
 
 (require 'init-cpp)
 (require 'init-godot)
+(require 'init-java)
 
 (require 'init-copilot)
 
