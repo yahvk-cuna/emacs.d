@@ -122,6 +122,7 @@
 (require 'init-common-lisp)
 
 (require 'init-cpp)
+(require 'init-godot)
 
 (require 'init-copilot)
 
