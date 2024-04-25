@@ -4,8 +4,9 @@
 
 (require-package 'paredit)
 
+
 (defun sanityinc/maybe-map-paredit-newline ()
-  (unless (or (memq major-mode '(inferior-emacs-lisp-mode cider-repl-mode))
+  (unless (or (derived-mode-p 'inferior-emacs-lisp-mode 'cider-repl-mode)
               (minibufferp))
     (local-set-key (kbd "RET") 'paredit-newline)))
 
@@ -15,31 +16,10 @@
   (diminish 'paredit-mode " Par")
   ;; Suppress certain paredit keybindings to avoid clashes, including
   ;; my global binding of M-?
-  (dolist (binding '("C-<left>" "C-<right>" "C-M-<left>" "C-M-<right>" "M-s" "M-?"))
-    (define-key paredit-mode-map (read-kbd-macro binding) nil)))
+  (dolist (binding '("RET" "C-<left>" "C-<right>" "C-M-<left>" "C-M-<right>" "M-s" "M-?"))
+    (define-key paredit-mode-map (read-kbd-macro binding) nil))
+  (define-key paredit-mode-map (kbd "M-<up>") 'paredit-splice-sexp-killing-backward))
 
-(defun paredit/space-for-delimiter-p (endp delm)
-  (or (member 'font-lock-keyword-face (text-properties-at (1- (point))))
-      (not (derived-mode-p 'basic-mode
-                           'c++-mode
-                           'c-mode
-                           'coffee-mode
-                           'csharp-mode
-                           'd-mode
-                           'dart-mode
-                           'go-mode
-                           'java-mode
-                           'js-mode
-                           'lua-mode
-                           'objc-mode
-                           'pascal-mode
-                           'python-mode
-                           'r-mode
-                           'ruby-mode
-                           'rust-mode
-                           'typescript-mode))))
-(after-load 'paredit
-  (add-to-list 'paredit-space-for-delimiter-predicates 'paredit/space-for-delimiter-p))
 
 
 ;; Use paredit in the minibuffer
@@ -56,17 +36,24 @@
 
 (defun sanityinc/conditionally-enable-paredit-mode ()
   "Enable paredit during lisp-related minibuffer commands."
-  (if (memq this-command paredit-minibuffer-commands)
-      (enable-paredit-mode)))
+  (when (memq this-command paredit-minibuffer-commands)
+    (enable-paredit-mode)))
 
-;; ----------------------------------------------------------------------------
-;; Enable some handy paredit functions in all prog modes
-;; ----------------------------------------------------------------------------
+(add-hook 'sanityinc/lispy-modes-hook 'enable-paredit-mode)
 
-(require-package 'paredit-everywhere)
-(after-load 'paredit-everywhere
-  (define-key paredit-everywhere-mode-map (kbd "M-s") nil))
-(add-hook 'prog-mode-hook 'paredit-everywhere-mode)
+(when (maybe-require-package 'puni)
+  ;;(add-hook 'prog-mode-hook 'puni-mode)
+  (add-hook 'sanityinc/lispy-modes-hook (lambda () (puni-mode -1)))
+  (with-eval-after-load 'puni
+    (define-key puni-mode-map (kbd "M-(") 'puni-wrap-round)
+    (define-key puni-mode-map (kbd "C-(") 'puni-slurp-backward)
+    (define-key puni-mode-map (kbd "C-)") 'puni-slurp-forward)
+    (define-key puni-mode-map (kbd "C-}") 'puni-barf-forward)
+    (define-key puni-mode-map (kbd "C-{") 'puni-barf-backward)
+    (define-key puni-mode-map (kbd "M-<up>") 'puni-splice-killing-backward)
+    (define-key puni-mode-map (kbd "C-w") nil)))
+
+
 
 (provide 'init-paredit)
 ;;; init-paredit.el ends here

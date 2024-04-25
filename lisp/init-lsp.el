@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq read-process-output-max (* 1024 1024))
 (setq lsp-use-plists t)
 
 (defun lsp-booster--advice-json-parse (old-fn &rest args)
@@ -34,13 +33,26 @@
       orig-result)))
 (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
 
-(require-package 'lsp-mode)
-(require-package 'lsp-ui)
-(setq lsp-keymap-prefix "C-l")
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-l")
+  (setq lsp-eldoc-enable-hover nil)
+  :hook (
+         ;; (XXX-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
-(after-load 'lsp-mode
-  (define-key lsp-mode-map (kbd "M-.") 'lsp-find-definition)
-  (define-key lsp-mode-map (kbd "M-/") 'lsp-find-references))
+;; optionally
+(use-package lsp-ui
+  :init
+  (setq lsp-ui-sideline-show-code-actions t)
+  :commands lsp-ui-mode)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+;; optionally if you want to use debugger
+;; (use-package dap-mode)
+;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 (require-package 'yasnippet)
 (add-hook 'lsp-mode-hook #'yas-minor-mode)

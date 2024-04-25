@@ -53,6 +53,7 @@ locate PACKAGE."
 ;;; Fire up package.el
 
 (setq package-enable-at-startup nil)
+(setq package-native-compile t)
 (package-initialize)
 
 
@@ -81,10 +82,6 @@ advice for `require-package', to which ARGS are passed."
             (lambda ()
               (package--save-selected-packages
                (seq-uniq (append sanityinc/required-packages package-selected-packages))))))
-
-
-(require-package 'fullframe)
-(fullframe list-packages quit-window)
 
 
 (defun sanityinc/set-tabulated-list-column-width (col-name width)

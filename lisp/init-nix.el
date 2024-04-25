@@ -2,17 +2,22 @@
 ;;; Commentary:
 ;;; Code:
 
-(when (maybe-require-package 'nix-mode)
-  (maybe-require-package 'nixpkgs-fmt)
-  (maybe-require-package 'nix-sandbox)
-  (maybe-require-package 'nix-buffer)
+(if (maybe-require-package 'nix-ts-mode)
+    (when (and (fboundp 'treesit-ready-p) (treesit-ready-p 'nix t))
+      (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-ts-mode)))
+  (maybe-require-package 'nix-mode))
 
-  (when (maybe-require-package 'nixos-options)
-    ;; TODO: write a CAPF backend based on company-nixos-options
-    ))
+;; (with-eval-after-load 'eglot
+;;   (add-to-list 'eglot-server-programs '((nix-mode nix-ts-mode) . ("nil"))))
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-language-id-configuration '((nix-mode nix-ts-mode) . "nix"))
 
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs '((nix-mode) . ("nil"))))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "nil")
+                    :activation-fn (lsp-activate-on "nix")
+                    :server-id 'nix)))
+
+(maybe-require-package 'nixpkgs-fmt)
 
 (provide 'init-nix)
 ;;; init-nix.el ends here

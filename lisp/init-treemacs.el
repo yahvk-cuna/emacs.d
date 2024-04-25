@@ -2,12 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 (when (maybe-require-package 'treemacs)
-  (after-load 'projectile
+  (with-eval-after-load 'projectile
     (require-package 'treemacs-projectile))
-  (after-load 'magit
-    (require-package 'treemacs-magit))
-  (after-load 'lsp
-    (require-package 'lsp-treemacs)))
+  (with-eval-after-load 'magit
+    (require-package 'treemacs-magit)))
 
 (global-set-key (kbd "M-0") 'treemacs-select-window)
 (global-set-key (kbd "C-x t 1") 'treemacs-delete-other-windows)

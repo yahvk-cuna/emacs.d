@@ -20,18 +20,19 @@
 (defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
 (defconst *is-a-mac* (eq system-type 'darwin))
 
-;;----------------------------------------------------------------------------
-;; Adjust garbage collection thresholds during startup, and thereafter
-;;----------------------------------------------------------------------------
-(let ((normal-gc-cons-threshold (* 20 1024 1024))
-      (init-gc-cons-threshold (* 128 1024 1024)))
-  (setq gc-cons-threshold init-gc-cons-threshold)
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+
+;; Adjust garbage collection threshold for early startup (see use of gcmh below)
+(setq gc-cons-threshold (* 128 1024 1024))
 
-;;----------------------------------------------------------------------------
+
+;; Process performance tuning
+
+(setq read-process-output-max (* 4 1024 1024))
+(setq process-adaptive-read-buffering nil)
+
+
+
 ;; Bootstrap config
-;;----------------------------------------------------------------------------
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
@@ -40,14 +41,21 @@
 (require 'init-exec-path) ;; Set up $PATH
 (require 'init-cnfont)
 
-;;----------------------------------------------------------------------------
+;; General performance tuning
+(when (require-package 'gcmh)
+  (setq gcmh-high-cons-threshold (* 128 1024 1024))
+  (add-hook 'after-init-hook (lambda ()
+                               (gcmh-mode)
+                               (diminish 'gcmh-mode))))
+
+(setq jit-lock-defer-time 0)
+
+
 ;; Allow users to provide an optional "init-preload-local.el"
-;;----------------------------------------------------------------------------
 (require 'init-preload-local nil t)
 
-;;----------------------------------------------------------------------------
+
 ;; Load configs for specific features and modes
-;;----------------------------------------------------------------------------
 
 (require-package 'diminish)
 (maybe-require-package 'scratch)
@@ -69,6 +77,7 @@
 
 (require 'init-lsp)
 (require 'init-recentf)
+(require 'init-minibuffer)
 (require 'init-selectrum)
 (require 'init-hippie-expand)
 (require 'init-corfu)
@@ -105,7 +114,7 @@
 (require 'init-python)
 (require 'init-haskell)
 (require 'init-elm)
-; (require 'init-purescript)
+(require 'init-purescript)
 (require 'init-ruby)
 (require 'init-rails)
 (require 'init-sql)
@@ -119,13 +128,15 @@
 (require 'init-terraform)
 ;;(require 'init-nix)
 (maybe-require-package 'nginx-mode)
+(maybe-require-package 'just-mode)
+(maybe-require-package 'justl)
+
 
 (require 'init-paredit)
 (require 'init-lisp)
-(require 'init-slime)
+(require 'init-sly)
 ; (require 'init-clojure)
 ; (require 'init-clojure-cider)
-(require 'init-common-lisp)
 
 (require 'init-cpp)
 (require 'init-godot)
@@ -141,10 +152,11 @@
 (require 'init-folding)
 (require 'init-dash)
 
-;;(require 'init-twitter)
-;; (require 'init-mu)
 (require 'init-direnv)
 (require 'init-ledger)
+(require 'init-lua)
+(require 'init-uiua)
+(require 'init-terminals)
 ;; Extra packages which don't require any configuration
 
 (require-package 'sudo-edit)

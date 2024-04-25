@@ -12,5 +12,8 @@
 (maybe-require-package 'forge)
 (maybe-require-package 'github-review)
 
+(when (maybe-require-package 'flycheck-actionlint)
+  (flycheck-actionlint-setup))
+
 (provide 'init-github)
 ;;; init-github.el ends here
