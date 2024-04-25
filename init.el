@@ -84,6 +84,7 @@
 
 (require 'init-compile)
 ;;(require 'init-crontab)
+(require 'init-tex)
 (require 'init-textile)
 (require 'init-markdown)
 (require 'init-csv)
