@@ -105,6 +105,7 @@ advice for `require-package', to which ARGS are passed."
 
 
 (require-package 'use-package)
+(setq use-package-always-ensure t)
 
 (provide 'init-elpa)
 ;;; init-elpa.el ends here

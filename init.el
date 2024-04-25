@@ -162,6 +162,9 @@
   (setq-default uptimes-keep-count 200)
   (add-hook 'after-init-hook (lambda () (require 'uptimes))))
 
+(use-package quickrun)
+(use-package ace-jump-mode
+  :bind ("C-c SPC" . ace-jump-mode))
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient

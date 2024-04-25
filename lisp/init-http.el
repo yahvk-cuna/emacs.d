@@ -16,7 +16,7 @@
     (define-key json-mode-map (kbd "C-c C-j") #'jq-interactively)))
 
 (when (maybe-require-package 'restclient)
-  (require 'restclient-jq)
+  (require-package 'restclient-jq)
   (add-auto-mode 'restclient-mode "\\.rest\\'")
 
   (defun sanityinc/restclient ()
