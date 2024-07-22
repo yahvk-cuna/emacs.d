@@ -10,6 +10,8 @@
 (define-key copilot-mode-map (kbd "M-C-<right>") #'copilot-accept-completion-by-word)
 (define-key copilot-mode-map (kbd "M-C-<down>") #'copilot-accept-completion-by-line)
 
+(add-hook 'prog-mode-hook 'copilot-mode)
+
 (provide 'init-copilot)
 ;;; init-copilot.el ends here
 
