@@ -131,7 +131,6 @@
 (maybe-require-package 'just-mode)
 (maybe-require-package 'justl)
 
-
 (require 'init-paredit)
 (require 'init-lisp)
 (require 'init-sly)
@@ -177,6 +176,8 @@
 (use-package quickrun)
 (use-package ace-jump-mode
   :bind ("C-c SPC" . ace-jump-mode))
+(use-package expand-region
+  :bind ("C-M-SPC" . er/expand-region))
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
