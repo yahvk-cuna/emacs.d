@@ -6,11 +6,11 @@
 (cnfonts-mode 1)
 (setq cnfonts-use-face-font-rescale t)
 (setq cnfonts-personal-fontnames
-      '(("Maple Mono SC NF")
-        ("Maple Mono SC NF")
+      '(("Maple Mono SC NF" "Maple SC NF")
+        ("Maple Mono SC NF" "Maple SC NF")
         ()
-        ()
-        ()))
+        ("Noto Sans Mono")
+        ("Noto Sans Symbols")))
 
 (defun cnfonts-set-symbol-fonts (_fontsizes-list)
   "Set emoji font."
