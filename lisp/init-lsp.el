@@ -43,10 +43,11 @@
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 
-;; optionally
 (use-package lsp-ui
+  :after (lsp-mode)
   :init
   (setq lsp-ui-sideline-show-code-actions t)
+  (setq lsp-ui-sideline-diagnostic-max-lines 10)
   :commands lsp-ui-mode)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
