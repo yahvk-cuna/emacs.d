@@ -37,6 +37,9 @@
 (setq lsp-rust-server 'rust-analyzer)
 (setq lsp-rust-analyzer-cargo-watch-command "clippy")
 
+
+(use-package ron-mode
+  :ensure)
 
 (provide 'init-rust)
 ;;; init-rust.el ends here
