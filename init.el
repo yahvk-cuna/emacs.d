@@ -142,6 +142,7 @@
 (require 'init-java)
 
 (require 'init-copilot)
+(require 'init-gptel)
 
 (when *spell-check-support-enabled*
   (require 'init-spelling))
