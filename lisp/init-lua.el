@@ -11,6 +11,7 @@
   :args '("--indent-width=2" "--no-use-tab")
   :lighter "LuaFmt ")
 
+(add-hook 'lua-mode-hook #'lsp)
 
 (provide 'init-lua)
 ;;; init-lua.el ends here
