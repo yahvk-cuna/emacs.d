@@ -1,3 +1,0 @@
-[submodule "site-lisp/copilot.el"]
-	path = site-lisp/copilot.el
-	url = https://github.com/zerolfx/copilot.el.git
