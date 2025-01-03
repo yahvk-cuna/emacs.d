@@ -49,8 +49,8 @@
   (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-sideline-diagnostic-max-lines 10)
   :commands lsp-ui-mode)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-
+(use-package lsp-treemacs :commands (lsp-treemacs-errors-list lsp-treemacs-symbols))
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 ;; optionally if you want to use debugger
 ;; (use-package dap-mode)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
