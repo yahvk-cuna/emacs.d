@@ -102,7 +102,16 @@ advice for `require-package', to which ARGS are passed."
 
 
 (require-package 'use-package)
+(require 'use-package-ensure)
 (setq use-package-always-ensure t)
+(use-package auto-package-update
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-hide-results t)
+  (auto-package-update-maybe))
+(unless (package-installed-p 'vc-use-package)
+  (package-vc-install "https://github.com/slotThe/vc-use-package"))
+(require 'vc-use-package)
 
 (provide 'init-elpa)
 ;;; init-elpa.el ends here
