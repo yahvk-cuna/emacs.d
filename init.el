@@ -126,6 +126,7 @@
 (require 'init-yaml)
 (require 'init-docker)
 (require 'init-terraform)
+(require 'init-typst)
 ;;(require 'init-nix)
 (maybe-require-package 'nginx-mode)
 (maybe-require-package 'just-mode)
