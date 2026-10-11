@@ -175,10 +175,14 @@
   (add-hook 'after-init-hook (lambda () (require 'uptimes))))
 
 (use-package quickrun)
-(use-package ace-jump-mode
-  :bind ("C-c SPC" . ace-jump-mode))
+(use-package avy
+  :bind ("C-;" . avy-goto-char-timer)
+  :config
+  (avy-setup-default))
 (use-package expand-region
   :bind ("C-M-SPC" . er/expand-region))
+
+(global-set-key (kbd "M-RET") 'comment-indent-new-line)
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
