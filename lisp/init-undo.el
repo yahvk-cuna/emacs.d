@@ -1,4 +1,4 @@
-;;; init-undo -- undo tree
+;;; init-undo -- undo tree  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 (use-package vundo

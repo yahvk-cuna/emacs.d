@@ -1,4 +1,4 @@
-;;; init-cnfont -- config chinese font
+;;; init-cnfont -- config chinese font  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 (set-fontset-font "fontset-default" 'emoji "Noto Color Emoji" nil 'prepend)

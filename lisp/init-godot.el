@@ -1,4 +1,4 @@
-;;; init-godot.el --- Godot
+;;; init-godot.el --- Godot  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

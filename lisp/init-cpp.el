@@ -1,4 +1,4 @@
-;;; init-lsp --- Language Server Protocol
+;;; init-lsp --- Language Server Protocol  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 (require-package 'ccls)

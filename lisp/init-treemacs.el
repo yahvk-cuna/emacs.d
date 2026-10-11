@@ -1,4 +1,4 @@
-;;; init-treemacs --- treemacs
+;;; init-treemacs --- treemacs  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 (when (maybe-require-package 'treemacs)
