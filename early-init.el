@@ -11,6 +11,7 @@
 (setq package-enable-at-startup nil)
 (setq-default pgtk-wait-for-event-timeout 0)
 (setenv "LSP_USE_PLISTS" "true")
+(setenv "RUSTC_ICE" "0")
 
 ;; So we can detect this having been loaded
 (provide 'early-init)
